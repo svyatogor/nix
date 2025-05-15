@@ -1,0 +1,16 @@
+{
+  "flakes": [
+    {
+      "from": {
+        "id": "devenv",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "cachix",
+        "repo": "devenv",
+        "type": "github"
+      }
+    }
+  ],
+  "version": 2
+}

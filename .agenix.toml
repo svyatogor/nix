@@ -1,0 +1,6 @@
+[identities]
+svyatogor = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDEEcH+7RYxb13oNJ5r5A7J1EmJxDVcmjVml9QNkBSL"
+
+[[paths]]
+glob = "secrets/*"
+identities = [ "svyatogor" ]
