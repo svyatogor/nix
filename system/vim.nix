@@ -8,7 +8,7 @@
 }:
 # Add unstablePkgs here
 {
-  imports = [ inputs.nvf.nixosModules.default ];
+  imports = [inputs.nvf.nixosModules.default];
 
   programs.nvf = {
     enable = true;
@@ -20,6 +20,7 @@
       vim.lsp = {
         enable = true;
         inlayHints.enable = true;
+        formatOnSave = true;
       };
 
       vim.theme = {
@@ -27,11 +28,31 @@
         enable = true;
         style = "frappe";
       };
-      vim.formatter.conform-nvim.enable = true;
-      vim.filetree.nvimTree.enable = true;
+      vim.formatter.conform-nvim = {
+        enable = true;
+      };
+      vim.filetree.nvimTree = {
+        enable = true;
+        mappings.toggle = "<leader>b";
+        openOnSetup = false;
+        setupOpts = {
+          filters = {
+            git_ignored = true;
+            dotfiles = true;
+          };
+          git = {
+            enable = true;
+          };
+          modified.enable = true;
+        };
+      };
+      vim.git = {
+        enable = true;
+      };
 
       vim.options = {
         tabstop = 2;
+        shiftwidth = 2;
       };
 
       vim.languages.enableFormat = true;

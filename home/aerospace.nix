@@ -1,9 +1,8 @@
-{ ... }:
-{
+{...}: {
   enable = true;
   userSettings = {
-    after-login-command = [ ];
-    after-startup-command = [ ];
+    after-login-command = [];
+    after-startup-command = [];
     start-at-login = true;
     enable-normalization-flatten-containers = false;
     enable-normalization-opposite-orientation-for-nested-containers = true;
@@ -11,7 +10,7 @@
     default-root-container-layout = "tiles";
     default-root-container-orientation = "auto";
     key-mapping.preset = "qwerty";
-    on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
+    on-focused-monitor-changed = ["move-mouse monitor-lazy-center"];
 
     gaps = {
       inner = {
@@ -27,8 +26,8 @@
     };
 
     mode.main.binding = {
-      "cmd-h" = [ ];
-      "cmd-alt-h" = [ ];
+      "cmd-h" = [];
+      "cmd-alt-h" = [];
       "alt-slash" = "layout tiles horizontal vertical";
       "alt-comma" = "layout accordion horizontal vertical";
       "alt-h" = "focus left --boundaries all-monitors-outer-frame";
@@ -235,6 +234,10 @@
       }
       {
         "if".app-id = "ai.perplexity.mac";
+        run = "layout floating";
+      }
+      {
+        "if".window-title-regex-substring = "iterm2-quake";
         run = "layout floating";
       }
     ];
