@@ -3,18 +3,15 @@
   outputs,
   stateVersion,
   ...
-}:
-{
-  mkDarwin =
-    {
-      hostname,
-      username ? "alex",
-      system ? "aarch64-darwin",
-    }:
-    let
-      inherit (inputs.nixpkgs) lib;
-      unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
-    in
+}: {
+  mkDarwin = {
+    hostname,
+    username ? "alex",
+    system ? "aarch64-darwin",
+  }: let
+    inherit (inputs.nixpkgs) lib;
+    unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
+  in
     inputs.nix-darwin.lib.darwinSystem {
       specialArgs = {
         inherit
@@ -27,8 +24,7 @@
       #extraSpecialArgs = { inherit inputs; }
       modules = [
         (
-          { config, ... }:
-          {
+          {config, ...}: {
             homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
           }
         )

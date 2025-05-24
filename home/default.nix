@@ -31,7 +31,7 @@ in {
 
   catppuccin = {
     enable = true;
-    flavor = "frappe";
+    flavor = "latte";
   };
 
   home.enableNixpkgsReleaseCheck = false;
@@ -58,6 +58,85 @@ in {
     git = import ./git.nix {inherit pkgs;};
     aerospace = import ./aerospace.nix {inherit pkgs;};
 
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    yazi = {
+      enable = true;
+      # package = inputs.yazi.packages.${pkgs.system}.default;
+      enableFishIntegration = true;
+      plugins = {
+        git = pkgs.yaziPlugins.git;
+        diff = pkgs.yaziPlugins.diff;
+        mediainfo = pkgs.yaziPlugins.mediainfo;
+        rich-preview = pkgs.yaziPlugins.rich-preview;
+        smart-enter = pkgs.yaziPlugins.smart-enter;
+        bookmarks = ../assets/yazi/bookmarks.yazi;
+      };
+      initLua = ''
+        require("git"):setup()
+        require("bookmarks"):setup({
+          last_directory = { enable = false, persist = false, mode="dir" },
+          persist = "all",
+          desc_format = "full",
+          file_pick_mode = "parent",
+          custom_desc_input = false,
+          notify = {
+            enable = true,
+            timeout = 1,
+            message = {
+              new = "New bookmark '<key>' -> '<folder>'",
+              delete = "Deleted bookmark in '<key>'",
+              delete_all = "Deleted all bookmarks",
+            },
+          },
+        })
+      '';
+      keymap = {
+        manager.prepend_keymap = [
+          {
+            on = "<Enter>";
+            run = "plugin smart-enter";
+            desc = "Enter the child directory, or open the file";
+          }
+          {
+            on = "<C-d>";
+            run = "plugin diff";
+            desc = "Diff the selected with the hovered file";
+          }
+          {
+            on = ["m"];
+            run = "plugin bookmarks save";
+            desc = "Save current position as a bookmark";
+          }
+          {
+            on = ["'"];
+            run = "plugin bookmarks jump";
+            desc = "Jump to a bookmark";
+          }
+          {
+            on = ["b" "d"];
+            run = "plugin bookmarks delete";
+            desc = "Delete a bookmark";
+          }
+        ];
+      };
+      settings = {
+        plugin.prepend_fetchers = [
+          {
+            id = "git";
+            name = "*";
+            run = "git";
+          }
+          {
+            id = "git";
+            name = "*/";
+            run = "git";
+          }
+        ];
+      };
+    };
     kitty = {
       enable = true;
       enableGitIntegration = true;

@@ -37,16 +37,13 @@
     };
   };
 
-  outputs =
-    { ... }@inputs:
-    with inputs;
-    let
+  outputs = {...} @ inputs:
+    with inputs; let
       inherit (self) outputs;
 
       stateVersion = "24.05";
-      system = import ./system { inherit inputs outputs stateVersion; };
-    in
-    {
+      system = import ./system {inherit inputs outputs stateVersion;};
+    in {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#Svyatogors-MacBook-Pro
       darwinConfigurations = {
