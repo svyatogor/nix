@@ -57,7 +57,15 @@ in {
     bat = import ./bat.nix {inherit pkgs;};
     git = import ./git.nix {inherit pkgs;};
     aerospace = import ./aerospace.nix {inherit pkgs;};
-
+    lazydocker = {
+      enable = true;
+    };
+    lazygit = {
+      enable = true;
+    };
+    btop = {
+      enable = true;
+    };
     zoxide = {
       enable = true;
       enableFishIntegration = true;

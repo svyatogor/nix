@@ -3,14 +3,15 @@
   pkgs,
   unstablePkgs,
   ...
-}: let
+}:
+let
   inherit (inputs) nixpkgs nixpkgs-unstable;
-in {
+in
+{
   environment.systemPackages = with pkgs; [
     # nixpkgs-unstable.legacyPackages.${pkgs.system}.talosctl
 
     fastfetch
-    btop
     diffr # Modern Unix `diff`
     difftastic # Modern Unix `diff`
     du-dust # Modern Unix `du`
@@ -30,11 +31,11 @@ in {
     jq
     ngrok
     _1password-cli
-    zellij
     inetutils
     wget
     expect
     lazydocker
+    lazygit
     curlie
     gnupg
     gh
