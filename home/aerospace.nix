@@ -237,7 +237,7 @@
         run = "layout floating";
       }
       {
-        "if".window-title-regex-substring = "iterm2-quake";
+        "if".window-title-regex-substring = "(MetaMask)";
         run = "layout floating";
       }
     ];

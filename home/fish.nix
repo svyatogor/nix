@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   enable = true;
 
   shellAliases = {
@@ -11,11 +11,25 @@
     gss = "git status -s";
   };
   plugins = [
-    { name = "fzf"; src = pkgs.fishPlugins.fzf-fish.src; }
-    { name = "done"; src = pkgs.fishPlugins.done.src; }
-    { name = "forgit"; src = pkgs.fishPlugins.forgit.src; }
-    { name = "hydro"; src = pkgs.fishPlugins.hydro.src; }
-    { name = "fish-nx"; src = pkgs.fetchFromGitHub {
+    {
+      name = "fzf";
+      src = pkgs.fishPlugins.fzf-fish.src;
+    }
+    {
+      name = "done";
+      src = pkgs.fishPlugins.done.src;
+    }
+    {
+      name = "forgit";
+      src = pkgs.fishPlugins.forgit.src;
+    }
+    {
+      name = "hydro";
+      src = pkgs.fishPlugins.hydro.src;
+    }
+    {
+      name = "fish-nx";
+      src = pkgs.fetchFromGitHub {
         owner = "jukben";
         repo = "fish-nx";
         rev = "8c7ed24";
@@ -25,21 +39,6 @@
   ];
 
   interactiveShellInit = ''
-    function __node_binpath_cwd -v PWD
-      set -l node_modules_path "$PWD/node_modules/.bin"
-      if test -e "$node_modules_path"
-        set -g __node_binpath "$node_modules_path"
-        set -x PATH $PATH $__node_binpath
-      else
-        set -q __node_binpath
-          and set -l index (contains -i -- $__node_binpath $PATH)
-          and set -e PATH[$index]
-          and set -e __node_binpath
-      end
-    end
-
-    __node_binpath_cwd $PWD
-
     set fish_greeting # Disable greeting
     set fish_color_valid_path
     set hydro_symbol_git_dirty ' ●'

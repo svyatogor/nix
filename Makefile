@@ -1,18 +1,21 @@
 \
 # Makefile for managing Nix Darwin configuration
-
+ 
 # Variables
-FLAKE_TARGET = .#Svyatogors-MacBook-Pro
+# FLAKE_TARGET = .#Svyatogors-MacBook-Pro
 
 # Phony targets (targets that don't represent files)
-.PHONY: build update switch gc all
+.PHONY: build update switch clean all
 
 # Default target
 all: build
 
 # Build the Darwin configuration
-build:
+init:
 	nix --extra-experimental-features 'nix-command flakes'  build ".#darwinConfigurations.Svyatogors-MacBook-Pro.system"
+
+build:
+	nh darwin build ".#"
 
 # Update flake inputs
 update:
@@ -20,9 +23,9 @@ update:
 
 # Switch to the new configuration
 switch:
-	./result/sw/bin/darwin-rebuild switch --flake ".#"
+	nh darwin switch ".#"
 
 # Collect garbage (delete old generations)
-gc:
+clean:
 	nix-collect-garbage -d
 

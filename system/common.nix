@@ -9,13 +9,11 @@
   pkgs,
   unstablePkgs,
   ...
-}:
-let
+}: let
   inherit (inputs) nixpkgs nixpkgs-unstable;
   # Import the homebrew packages
   homebrewPackages = import ./homebrew-packages.nix;
-in
-{
+in {
   users.users.sergeykuleshov = {
     name = "sergeykuleshov";
     home = "/Users/sergeykuleshov";
@@ -39,16 +37,10 @@ in
     hostPlatform = lib.mkDefault "${system}";
   };
 
-  # fonts.packages = [
-  #   (pkgs.nerdfonts.override {
-  #     fonts = [
-  #       "FiraCode"
-  #       "FiraMono"
-  #       "Hack"
-  #       "JetBrainsMono"
-  #     ];
-  #   })
-  # ];
+  fonts.packages = [
+    pkgs.ubuntu-sans-mono
+    pkgs.jetbrains-mono
+  ];
 
   # pins to stable as unstable updates very often
   nix.registry = {
@@ -99,10 +91,11 @@ in
   security.pam.services.sudo_local.touchIdAuth = true;
 
   # macOS configuration
-  system.activationScripts.postUserActivation.text = ''
-    # Following line should allow us to avoid a logout/login cycle
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-  '';
+  # system.activationScripts.postUserActivation.text = ''
+  #   # Following line should allow us to avoid a logout/login cycle
+  #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  # '';
+  system.primaryUser = "sergeykuleshov";
   system.defaults = {
     # NSGlobalDomain.AppleShowAllExtensions = true;
     # NSGlobalDomain.NSUseAnimatedFocusRing = false;
@@ -200,11 +193,10 @@ in
 
   services.dnsmasq.enable = true;
   environment.etc."dnsmasq.conf".text = ''
-    address=/.orb.stack/127.0.0.1
+    address=/.local.stack/127.0.0.1
     listen-address=127.0.0.1
   '';
-  environment.etc."resolver/orb.stack".text = ''
+  environment.etc."resolver/local.stack".text = ''
     nameserver 127.0.0.1
   '';
-
 }
