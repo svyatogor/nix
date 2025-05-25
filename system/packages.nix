@@ -3,11 +3,9 @@
   pkgs,
   unstablePkgs,
   ...
-}:
-let
+}: let
   inherit (inputs) nixpkgs nixpkgs-unstable;
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     # nixpkgs-unstable.legacyPackages.${pkgs.system}.talosctl
 
@@ -25,7 +23,6 @@ in
     nixpkgs-fmt
     fd
     neovim
-    helix
     nixd
     nixfmt-rfc-style
     jq

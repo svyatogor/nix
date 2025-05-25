@@ -27,7 +27,7 @@
       vim.theme = {
         name = "catppuccin";
         enable = true;
-        style = "latte";
+        style = "frappe";
       };
       vim.formatter.conform-nvim = {
         enable = true;
@@ -84,6 +84,7 @@
       vim.languages.enableTreesitter = true;
 
       vim.languages.nix.enable = true;
+      vim.languages.nix.lsp.server = "nixd";
       vim.languages.html.enable = true;
       vim.languages.ruby = {
         enable = true;

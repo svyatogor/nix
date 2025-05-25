@@ -31,7 +31,7 @@ in {
 
   catppuccin = {
     enable = true;
-    flavor = "latte";
+    flavor = "frappe";
   };
 
   home.enableNixpkgsReleaseCheck = false;
@@ -184,8 +184,8 @@ in {
         "--listen-on=unix:/tmp/my-socket"
       ];
       font = {
-        name = "Ubuntu Mono";
-        size = 13;
+        name = "Ubuntu Sans Mono";
+        size = 13.5;
       };
     };
   };
