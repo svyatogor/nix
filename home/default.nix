@@ -4,11 +4,13 @@
   unstablePkgs,
   inputs,
   ...
-}: let
-  dank-mono = import ./dank-mono.nix {inherit pkgs;}; # Import the new module
-in {
+}:
+let
+  dank-mono = import ./dank-mono.nix { inherit pkgs; }; # Import the new module
+in
+{
   age = {
-    identityPaths = ["${config.home.homeDirectory}/.ssh/id_edsa"];
+    identityPaths = [ "${config.home.homeDirectory}/.ssh/id_edsa" ];
 
     secrets = {
       hosts = {
@@ -49,14 +51,14 @@ in {
   ];
 
   programs = {
-    fish = import ./fish.nix {inherit pkgs;};
-    awscli = import ./aws.nix {inherit pkgs;};
-    fzf = import ./fzf.nix {inherit pkgs;};
-    ssh = import ./ssh.nix {};
-    eza = import ./eza.nix {inherit pkgs;};
-    bat = import ./bat.nix {inherit pkgs;};
-    git = import ./git.nix {inherit pkgs;};
-    aerospace = import ./aerospace.nix {inherit pkgs;};
+    fish = import ./fish.nix { inherit pkgs; };
+    awscli = import ./aws.nix { inherit pkgs; };
+    fzf = import ./fzf.nix { inherit pkgs; };
+    ssh = import ./ssh.nix { };
+    eza = import ./eza.nix { inherit pkgs; };
+    bat = import ./bat.nix { inherit pkgs; };
+    git = import ./git.nix { inherit pkgs; };
+    aerospace = import ./aerospace.nix { inherit pkgs; };
     lazydocker = {
       enable = true;
     };
@@ -114,17 +116,20 @@ in {
             desc = "Diff the selected with the hovered file";
           }
           {
-            on = ["m"];
+            on = [ "m" ];
             run = "plugin bookmarks save";
             desc = "Save current position as a bookmark";
           }
           {
-            on = ["'"];
+            on = [ "'" ];
             run = "plugin bookmarks jump";
             desc = "Jump to a bookmark";
           }
           {
-            on = ["b" "d"];
+            on = [
+              "b"
+              "d"
+            ];
             run = "plugin bookmarks delete";
             desc = "Delete a bookmark";
           }
@@ -148,7 +153,13 @@ in {
     kitty = {
       enable = true;
       enableGitIntegration = true;
+      shellIntegration = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+      };
       extraConfig = ''
+        shell_integration all
+
         text_composition_strategy legacy
         window_padding_width 8
         modify_font cell_height 12px
@@ -190,7 +201,8 @@ in {
     };
   };
 
-  # xdg.configFile."zellij/config.kdl".source = ../dotfiles/zellij/config.kdl;
+  xdg.configFile."process-compose/theme.yaml".source =
+    ../assets/process-compose/catppuccin-frappe.yaml;
 
   home = {
     file = {

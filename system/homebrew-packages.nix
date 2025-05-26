@@ -34,7 +34,6 @@
     "appcleaner"
     "tableplus"
     "logi-options+"
-    "zed"
     "discord"
     "medis"
   ];
