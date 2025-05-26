@@ -41,7 +41,7 @@ in {
     pkgs.ubuntu-sans-mono
     pkgs.ubuntu-classic
     pkgs.jetbrains-mono
-    pkgs.cascadia-code
+    pkgs.nerd-fonts.symbols-only
   ];
 
   # pins to stable as unstable updates very often

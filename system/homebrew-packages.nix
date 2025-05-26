@@ -21,7 +21,6 @@
     "google-drive"
     "affinity-photo"
     "1password"
-    "font-symbols-only-nerd-font"
     "slack"
     "microsoft-openjdk@17"
     "microsoft-word"
