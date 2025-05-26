@@ -27,7 +27,7 @@
       vim.theme = {
         name = "catppuccin";
         enable = true;
-        style = "frappe";
+        style = "latte";
       };
       vim.formatter.conform-nvim = {
         enable = true;

@@ -4,13 +4,11 @@
   unstablePkgs,
   inputs,
   ...
-}:
-let
-  dank-mono = import ./dank-mono.nix { inherit pkgs; }; # Import the new module
-in
-{
+}: let
+  dank-mono = import ./dank-mono.nix {inherit pkgs;}; # Import the new module
+in {
   age = {
-    identityPaths = [ "${config.home.homeDirectory}/.ssh/id_edsa" ];
+    identityPaths = ["${config.home.homeDirectory}/.ssh/id_edsa"];
 
     secrets = {
       hosts = {
@@ -33,7 +31,7 @@ in
 
   catppuccin = {
     enable = true;
-    flavor = "frappe";
+    flavor = "latte";
   };
 
   home.enableNixpkgsReleaseCheck = false;
@@ -51,14 +49,14 @@ in
   ];
 
   programs = {
-    fish = import ./fish.nix { inherit pkgs; };
-    awscli = import ./aws.nix { inherit pkgs; };
-    fzf = import ./fzf.nix { inherit pkgs; };
-    ssh = import ./ssh.nix { };
-    eza = import ./eza.nix { inherit pkgs; };
-    bat = import ./bat.nix { inherit pkgs; };
-    git = import ./git.nix { inherit pkgs; };
-    aerospace = import ./aerospace.nix { inherit pkgs; };
+    fish = import ./fish.nix {inherit pkgs;};
+    awscli = import ./aws.nix {inherit pkgs;};
+    fzf = import ./fzf.nix {inherit pkgs;};
+    ssh = import ./ssh.nix {};
+    eza = import ./eza.nix {inherit pkgs;};
+    bat = import ./bat.nix {inherit pkgs;};
+    git = import ./git.nix {inherit pkgs;};
+    aerospace = import ./aerospace.nix {inherit pkgs;};
     lazydocker = {
       enable = true;
     };
@@ -116,12 +114,12 @@ in
             desc = "Diff the selected with the hovered file";
           }
           {
-            on = [ "m" ];
+            on = ["m"];
             run = "plugin bookmarks save";
             desc = "Save current position as a bookmark";
           }
           {
-            on = [ "'" ];
+            on = ["'"];
             run = "plugin bookmarks jump";
             desc = "Jump to a bookmark";
           }
@@ -202,7 +200,7 @@ in
   };
 
   xdg.configFile."process-compose/theme.yaml".source =
-    ../assets/process-compose/catppuccin-frappe.yaml;
+    ../assets/process-compose/catppuccin-latte.yaml;
 
   home = {
     file = {

@@ -39,7 +39,9 @@ in {
 
   fonts.packages = [
     pkgs.ubuntu-sans-mono
+    pkgs.ubuntu-classic
     pkgs.jetbrains-mono
+    pkgs.cascadia-code
   ];
 
   # pins to stable as unstable updates very often
